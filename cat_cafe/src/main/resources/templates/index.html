@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Cat cafe</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
+
+    <style>
+    body, html {
+    height: 100%;
+    font-family: "Inconsolata", sans-serif;
+    }
+
+    .bgimg {
+    background-position: center;
+    background-size: cover;
+    background-image: url("/images/sunset-3008779_1280.jpg");
+    min-height: 75%;
+    }
+
+    .menu {
+    display: none;
+    }
+
+</style>
+     
+</head>
+<body>
+
+    <div class="w3-top">
+        <div class="w3-row w3-padding w3-black">
+          <div class="w3-col s3">
+            <a href="/index" class="w3-button w3-block w3-black">HOME</a>
+          </div>
+          <div class="w3-col s3">
+            <a href="/catlist" class="w3-button w3-block w3-black">MEET THE CATS</a>
+          </div>
+          <div class="w3-col s3">
+            <a href="/booktable" class="w3-button w3-block w3-black">BOOK A TABLE</a>
+          </div>
+          <div class="w3-col s3" sec:authorize="hasAuthority('ADMIN')">
+            <a href="/bookinglist" class="w3-button w3-block w3-black">BOOKINGLIST</a>
+          </div>
+        </div>
+      </div>
+
+      <header class="bgimg w3-display-container w3-grayscale-min" >
+        <div class="w3-display-bottomleft w3-center w3-padding-large w3-hide-small" sec:authorize="hasAuthority('ADMIN') or hasAuthority('USER')">
+          <span class="w3-tag">Logged in as a <span sec:authentication="name"></span></span>
+          <form th:action="@{/logout}" method="post">
+            <button class="w3-button w3-black" type="submit">Sign out</button>
+           </form>
+        </div>
+        <div class="w3-display-middle w3-center">
+          <span class="w3-text-white" style="font-size:90px">Cat café<br>Meow</span>
+        </div>
+        <div class="w3-display-bottomright w3-center w3-padding-large" sec:authorize="!isAuthenticated()" >
+            <a href="/login" class="w3-button w3-block w3-black">Sign in</a>
+          </div>
+        </header>
+
+        <div class="w3-sand w3-grayscale w3-large"></div>
+
+        <div class="w3-container">
+            <div class="w3-content" style="max-width:700px">
+              <h3 class="w3-center w3-padding-16"><span class="w3-tag w3-wide">CAT CAFÈ MEOW</span></h3>
+              <p>This is imaginary cat café. This is my final project for back end -programming course.  </p>
+
+              <p><strong>Opening hours:</strong> Monday to Saturday 10AM-6PM</p>
+              <p><strong>Address:</strong> Osoite 1234, 33230 Tampere</p>
+            </div>
+          </div>
+          
+    
+</body>

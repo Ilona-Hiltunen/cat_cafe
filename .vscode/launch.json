@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-CatCafeApplication<cat_cafe>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "cat.cat_cafe.CatCafeApplication",
+            "projectName": "cat_cafe",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
