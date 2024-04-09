@@ -84,7 +84,7 @@ public class CatController {
 
         if (multipartFile.getSize() > 0) {
         String filename = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-        cat.setImagepath("/images/" + filename);
+        cat.setImagepath("images/" + filename);
         FileUploadUtil.saveFile(filename, multipartFile);
         }
 
