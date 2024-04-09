@@ -32,7 +32,7 @@ private long id;
 @Size(min=2, max=100, message="{catname.size}")
 private String catname;
 
-//Setting a cat's birthdate with validation.  I also had to set specific formatting, so that Google Chrome shows date input on the website as it's supposed to.
+//Setting a cat's birthdate with validation. I also had to set specific formatting, so that Google Chrome shows date input on the website as it's supposed to.
 @NotNull(message="{date.not.null}")
 @DateTimeFormat(pattern = "yyyy-MM-dd")
 private LocalDate birthdate;
@@ -42,7 +42,7 @@ private LocalDate birthdate;
 private String description;
 
 //Generating String with path to cat's image and setting a default picture
-private String imagePath = "/images/paw-print-220232_1280.jpg";
+private String imagepath = "/images/paw-print-220232_1280.jpg";
 
 //Generating a empty constructor and one with values
 
@@ -61,11 +61,11 @@ public Cat(
 public Cat(
         @NotEmpty(message = "{catname.not.empty}") @Size(min = 2, max = 100, message = "{catname.size}") String catname,
         @NotNull(message = "{date.not.null}") LocalDate birthdate,
-        @Size(max = 500, message = "{description.size}") String description, String imagePath) {
+        @Size(max = 500, message = "{description.size}") String description, String imagepath) {
     this.catname = catname;
     this.birthdate = birthdate;
     this.description = description;
-    this.imagePath = imagePath;
+    this.imagepath = imagepath;
 }
 
 //Generating getters and setters
@@ -102,19 +102,12 @@ public void setDescription(String description) {
     this.description = description;
 }
 
-public String getImagePath() {
-    return imagePath;
+public String getImagepath() {
+    return imagepath;
 }
 
-public void setImagePath(String imagePath) {
-    this.imagePath = imagePath;
-}
-
-
-//Generating toString
-@Override
-public String toString() {
-    return "Cat [id=" + id + ", catname=" + catname + ", birthdate=" + birthdate + ", description=" + description + "]";
+public void setImagepath(String imagePath) {
+    this.imagepath = imagePath;
 }
 
 //Generating method to return String of cat's age
@@ -134,6 +127,13 @@ public String ageToString(LocalDate birthdate) {
     }
 
     return "0";
+}
+
+
+@Override
+public String toString() {
+    return "Cat [id=" + id + ", catname=" + catname + ", birthdate=" + birthdate + ", description=" + description
+            + ", imagepath=" + imagepath + "]";
 }
     
 }

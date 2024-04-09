@@ -1,5 +1,7 @@
 package cat.cat_cafe.domain;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.time.LocalDateTime;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -30,11 +32,13 @@ private long id;
 @NotNull(message = "{guestCount.not.null}")
 @Min(value=1, message="{guestCount.min}")
 @Max(value=6, message="{guestCount.max}")
+@Column(name="guests", nullable = false)
 private int guestCount;
 
 //Setting the time and date of a booking with validation. I also had to set specific formatting, so that Google Chrome shows datetime-local input on the website as it's supposed to.
 @NotNull(message="{date.not.null}")
 @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+@Column(name = "bookingdate", nullable = false)
 private LocalDateTime bookingDate;
 
 //Joining this column to an Appuser-column, so we can connect the reservation with the user who made it
@@ -100,6 +104,38 @@ public void setAppUser(Appuser appUser) {
     this.appUser = appUser;
 }
 
+//Generating method to get a String of the time, so it shows with 2 digits in browser
+
+public String getTime() {
+    return timeOfBookingToString(bookingDate);
+}
+
+public String timeOfBookingToString(LocalDateTime bookingdate) {
+
+    NumberFormat formatter = new DecimalFormat("00");
+    String hours = formatter.format(bookingdate.getHour());
+    String minutes = formatter.format(bookingdate.getMinute());
+
+    return hours + ":" + minutes;
+}
+
+//Generating a method to have booking's ending time
+
+public String getEndingtime() {
+    return timeOfEndingToString(bookingDate);
+}
+
+public String timeOfEndingToString(LocalDateTime bookingdate) {
+
+    NumberFormat formatter = new DecimalFormat("00");
+    int hour = bookingdate.getHour() + 1;
+    String hours = formatter.format(hour);
+    String minutes = formatter.format(bookingdate.getMinute());
+
+    return hours + ":" + minutes;
+}
+
+
 //Generating toString. Ensuring that our app doesn't crash, if user attribute is not defined.
 
 @Override
@@ -111,6 +147,5 @@ public String toString() {
     return "Booking [id=" + id + ", guestCount=" + guestCount + ", bookingDate=" + bookingDate + "]";
     }
 }
-
 
 }

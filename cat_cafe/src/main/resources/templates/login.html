@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Sign in</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
+
+    <style>
+    body, html {
+    height: 100%;
+    font-family: "Inconsolata", sans-serif;
+    }
+
+  
+
+</style>
+     
+</head>
+<body>
+
+    
+
+
+        <div>
+            <h3 class="w3-center w3-padding-16"><span class="w3-tag w3-wide">SIGN IN</span></h3>
+            <div class="w3-center" th:if="${param.logout}"><b>You have been logged out.</b> </div>
+            <div class="w3-center"><a href="/signup" class="w3-button w3-black">NEW USER? SIGN UP.</a></div>
+            <form class="w3-container" th:action="@{/login}" action="#" method="post">
+                <label for="username">Username:</label>
+                <p><input class="w3-input w3-padding-16 w3-border" type="text" name="username" placeholder="Username" ></p>
+
+                <label for="password">Password:</label>
+                <p><input class="w3-input w3-padding-16 w3-border" type="password" name="password" placeholder="Password" ></p>
+
+                <p class="w3-center" th:if="${param.error}"><b>Invalid username or password.</b></p>
+
+                <p class="w3-center"><button class="w3-button w3-black" type="submit">SIGN IN</button></p>
+                
+            </form>
+            </div>
+
+            
+</body>
+</html>

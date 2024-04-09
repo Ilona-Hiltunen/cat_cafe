@@ -79,7 +79,7 @@
        
     
      <div class="gallery" th:each="cat:${cats}">
-        <img th:src="${cat.imagePath}" onerror="this.onerror=null;this.src='/images/paw-print-220232_1280.jpg'" width="500" height="400">
+        <img th:src="${cat.imagepath}" onerror="this.onerror=null;this.src='/images/paw-print-220232_1280.jpg'" width="500" height="400">
         <p><b>Name: </b><span th:text="${cat.catname}"> </span></p>
         <p><b>Age: </b><span th:text="${cat.age}"> </span></p>
         <p><b>Description:</b><br><span th:text="${cat.description}"> </span></p>

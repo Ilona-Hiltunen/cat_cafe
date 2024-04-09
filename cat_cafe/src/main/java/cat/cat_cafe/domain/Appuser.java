@@ -41,6 +41,18 @@ private String passwordHash;
 @NotNull(message = "{role.not.empty}")
 private String role;
 
+//Generating firstname with validation
+@Column(name = "firstname", nullable = false)
+@NotNull(message = "{firstname.not.empty}")
+@Size(min = 3, max = 20, message = "{firstname.size}")
+private String firstname;
+
+//Generating last name with validation
+@Column(name = "lastname", nullable = false)
+@NotNull(message = "{lastname.not.empty}")
+@Size(min = 3, max = 30, message = "{lastname.size}")
+private String lastname;
+
 //Generating an email with validation
 @Column(name = "email", unique = true)
 @NotNull(message = "{email.not.empty}")
@@ -66,11 +78,15 @@ public Appuser(
         @NotNull(message = "{username.not.empty}") @Size(min = 2, max = 20, message = "{username.size}") String username,
         @NotNull(message = "{password.not.empty}") String passwordHash,
         @NotNull(message = "{role.not.empty}") String role,
+        @NotNull(message = "{firstname.not.empty}") @Size(min = 3, max = 20, message = "{firstname.size}") String firstname,
+        @NotNull(message = "{lastname.not.empty}") @Size(min = 3, max = 30, message = "{lastname.size}") String lastname,
         @NotNull(message = "{email.not.empty}") @Size(min = 5, max = 40, message = "{email.size}") String email,
         @NotNull(message = "{pNumber.not.empty}") @Size(min = 5, max = 20, message = "{pNumber.size}") String pNumber) {
     this.username = username;
     this.passwordHash = passwordHash;
     this.role = role;
+    this.firstname = firstname;
+    this.lastname = lastname;
     this.email = email;
     this.pNumber = pNumber;
 }
@@ -132,13 +148,29 @@ public void setBookings(List<Booking> bookings) {
     this.bookings = bookings;
 }
 
-//Generating toString
-@Override
-public String toString() {
-    return "Appuser [id=" + appUserId + ", username=" + username + ", passwordHash=" + passwordHash + ", role=" + role
-            + ", email=" + email + ", pNumber=" + pNumber + "]";
+public String getFirstname() {
+    return firstname;
 }
 
+public void setFirstname(String firstname) {
+    this.firstname = firstname;
+}
 
+public String getLastname() {
+    return lastname;
+}
+
+public void setLastname(String lastname) {
+    this.lastname = lastname;
+}
+
+//Generating toString
+
+@Override
+public String toString() {
+    return "Appuser [appUserId=" + appUserId + ", username=" + username + ", passwordHash=" + passwordHash + ", role="
+            + role + ", firstname=" + firstname + ", lastname=" + lastname + ", email=" + email + ", pNumber=" + pNumber
+            + "]";
+}
     
 }

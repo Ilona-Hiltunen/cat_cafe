@@ -61,7 +61,7 @@ public class CatController {
     //Had to do this, because I found out multipartfile always getting filled even though user didn't send any file
         if (multipartFile.getSize() > 0) {
         String filename = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-        cat.setImagePath("/images/" + filename);
+        cat.setImagepath("/images/" + filename);
         FileUploadUtil.saveFile(filename, multipartFile);
         }
 
@@ -78,11 +78,13 @@ public class CatController {
         if (bindingResult.hasErrors()) {
             model.addAttribute("cat", cat);
             return "/editcat";
+        } if (cat.getBirthdate().getYear() < 1986) {
+            bindingResult.rejectValue("birthdate", "err.birthdate", "Cat can't be this old.");
         }
 
         if (multipartFile.getSize() > 0) {
         String filename = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-        cat.setImagePath("/images/" + filename);
+        cat.setImagepath("/images/" + filename);
         FileUploadUtil.saveFile(filename, multipartFile);
         }
 

@@ -1,5 +1,7 @@
 package cat.cat_cafe.web;
 
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -41,7 +43,30 @@ public class BookingController {
     public String saveBooking(@Valid @ModelAttribute("booking") Booking booking, BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
-            System.out.println(bindingResult);
+            model.addAttribute("booking", booking);
+            model.addAttribute("appUser", booking.getAppUser());
+            model.addAttribute("bookings", bRepository.findByAppUser(booking.getAppUser()));
+            return "/booktable";
+        } else if (booking.getBookingDate().isBefore(LocalDateTime.now())) {
+            bindingResult.rejectValue("bookingDate", "err.date", "Booking can't be in the past.");
+            model.addAttribute("booking", booking);
+            model.addAttribute("appUser", booking.getAppUser());
+            model.addAttribute("bookings", bRepository.findByAppUser(booking.getAppUser()));
+            return "/booktable";
+        } else if (booking.getBookingDate().getHour() < 10 || booking.getBookingDate().getHour() >= 19) {
+
+            if (booking.getBookingDate().getHour() == 19 && booking.getBookingDate().getMinute() == 0) {
+            bRepository.save(booking);
+            return "redirect:/booktable";
+            }
+
+            bindingResult.rejectValue("bookingDate", "err.date1", "Bookings are avaible to 10am-7pm. Please select booking time within these values.");
+            model.addAttribute("booking", booking);
+            model.addAttribute("appUser", booking.getAppUser());
+            model.addAttribute("bookings", bRepository.findByAppUser(booking.getAppUser()));
+            return "/booktable";
+        } else if (booking.getBookingDate().getDayOfWeek().name().equals("SUNDAY")) {
+            bindingResult.rejectValue("bookingDate", "err.date2", "Unfortunately we're closed on sundays.");
             model.addAttribute("booking", booking);
             model.addAttribute("appUser", booking.getAppUser());
             model.addAttribute("bookings", bRepository.findByAppUser(booking.getAppUser()));
@@ -52,12 +77,11 @@ public class BookingController {
         return "redirect:/booktable";
     }
 
-    //Anothersaving method for saving booking, when editing it, so it doesn't redirect user to /booktable
+    //Anothersaving method for saving booking, when editing it, so it doesn't redirect user to /booktable. Also removed some of the validation, so admin can do editings more freely.
     @PostMapping("/savebooking1")
     public String saveBooking1(@Valid @ModelAttribute("booking") Booking booking, BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
-            System.out.println(bindingResult);
             model.addAttribute("booking", booking);
             model.addAttribute("appUser", booking.getAppUser());
             return "/editbooking";

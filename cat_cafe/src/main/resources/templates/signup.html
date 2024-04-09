@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Sign up</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
+
+    <style>
+    body, html {
+    height: 100%;
+    font-family: "Inconsolata", sans-serif;
+    }
+
+</style>
+     
+</head>
+<body>
+        <div>
+            <h3 class="w3-center w3-padding-16"><span class="w3-tag w3-wide">SIGN UP</span></h3>
+            <div class="w3-center"><a href="/login" class="w3-button w3-black">ALREADY HAVE AN ACCOUNT? SIGN IN.</a></div>
+            <form class="w3-container" th:object="${signupUser}" th:action="@{/savecustomer}" action="#" method="post">
+
+                <label for="username">Username:</label>
+                <p><input class="w3-input w3-padding-16 w3-border" type="text" id="username" th:field="*{username}" placeholder="Username" ></p>
+                <b><div th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Error</div></b>
+
+                <label for="password">Password:</label>
+                <p><input class="w3-input w3-padding-16 w3-border" type="password" id="password" th:field="*{password}" placeholder="Password" ></p>
+                <b><div th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Error</div></b>
+
+                <label for="firstname">First name:</label>
+                <p><input class="w3-input w3-padding-16 w3-border" type="text" id="firstname" th:field="*{firstname}" placeholder="First name" ></p>
+                <b><div th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}">Error</div></b>
+
+                <label for="lastname">Last name:</label>
+                <p><input class="w3-input w3-padding-16 w3-border" type="text" id="lastname" th:field="*{lastname}" placeholder="Last name" ></p>
+                <b><div th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}">Error</div></b>
+
+                <label for="email">Email:</label>
+                <p><input class="w3-input w3-padding-16 w3-border" type="email" id="email" th:field="*{email}" placeholder="Email" ></p>
+                <b><div th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Error</div></b>
+
+                <label for="pNumber">Phone number:</label>
+                <p><input class="w3-input w3-padding-16 w3-border" type="text" id="pNumber" th:field="*{pNumber}" placeholder="Phone number" ></p>
+                <b><div th:if="${#fields.hasErrors('pNumber')}" th:errors="*{pNumber}">Error</div></b>
+
+                <p class="w3-center"><button class="w3-button w3-black" type="submit">SIGN UP</button></p>
+            </form>
+            </div>
+
+</body>
+</html>

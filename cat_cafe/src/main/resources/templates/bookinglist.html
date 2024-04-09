@@ -78,15 +78,19 @@
         <h3 class="w3-center w3-padding-16"><span class="w3-tag w3-wide">BOOKINGS</span></h3>
         <table class="center w3-container w3-border" >
           <tr >
+              <th>Username</th>
               <th>Name</th>
               <th>Guests</th>
-              <th>Time</th>
+              <th>Booking starts</th>
+              <th>Booking ends</th>
               <th>Date</th>
           </tr>  
           <tr th:each = "booking : ${bookings}">
               <td th:text="${booking.appUser.username}"></td>
+              <td th:text="${booking.appUser.firstname} + ' ' + ${booking.appUser.lastname}"></td>
               <td th:text="${booking.guestCount}"></td> 
-              <td th:text="${booking.bookingDate.getHour()} + . + ${booking.bookingDate.getMinute()}"></td>
+              <td th:text="${booking.time}"></td>
+              <td th:text="${booking.endingtime}"></td>
               <td th:text="${booking.bookingDate.getDayOfMonth()} + . + ${booking.bookingDate.getMonthValue()} + . + ${booking.bookingDate.getYear()}"></td> 
               <td sec:authorize="hasAuthority('ADMIN')"><a th:href ="@{/deletebooking/{id}(id=${booking.id})}">Delete</a></td>
               <td sec:authorize="hasAuthority('ADMIN')"><a th:href ="@{/editbooking/{id}(id=${booking.id})}">Edit</a></td>

@@ -32,7 +32,11 @@ public class CatConfig {
         new AntPathRequestMatcher("/new**"),
         new AntPathRequestMatcher("/book**"),
         new AntPathRequestMatcher("/booking/**"),
-        new AntPathRequestMatcher("/removebooking/**")
+        new AntPathRequestMatcher("/removebooking/**"),
+        new AntPathRequestMatcher("/user**"),
+        new AntPathRequestMatcher("/user/**"),
+        new AntPathRequestMatcher("/deleteuser/**")
+
      };
 
      //Setting authentication and enabling some sites for all
@@ -45,11 +49,16 @@ public class CatConfig {
             .requestMatchers(antMatcher("/index/**")).permitAll()
             .requestMatchers(antMatcher("/catlist")).permitAll()
             .requestMatchers(antMatcher("/images/**")).permitAll()
+            .requestMatchers(antMatcher("/signup")).permitAll()
+            .requestMatchers(antMatcher("/savecustomer")).permitAll()
             .requestMatchers(antMatcher("/")).permitAll()
-            .requestMatchers(WHITE_LIST_URLS).permitAll()
+            .requestMatchers(WHITE_LIST_URLS).hasAuthority("ADMIN")
             .anyRequest().authenticated())
             .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.disable()))
-            .formLogin(formlogin -> formlogin.defaultSuccessUrl("/index", true).permitAll())
+            .formLogin(formlogin -> formlogin
+            .loginPage("/login")
+            .defaultSuccessUrl("/index", true)
+            .permitAll())
             .logout(logout -> logout.permitAll())
             .csrf(csrf -> csrf.disable());
 
