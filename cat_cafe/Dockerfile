@@ -9,6 +9,8 @@ RUN mvn -f /home/app/pom.xml clean package
 # Package stage
 # Use an official Maven image as the base image
 FROM eclipse-temurin:17-jre-focal
+#Doing a necessary directory structure
+RUN mkdir -p /src/main/resources/static/images/
 # Copy the built JAR file from the previous stage to the container
 COPY --from=build /home/app/target/cat_cafe-0.0.1-SNAPSHOT.jar /usr/local/lib/pkg.jar
 EXPOSE 8080
