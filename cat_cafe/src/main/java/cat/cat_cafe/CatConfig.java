@@ -19,7 +19,6 @@ import cat.cat_cafe.web.AppUserService;
 
 @Configuration
 @EnableMethodSecurity(securedEnabled = true)
-@EnableWebMvc
 public class CatConfig {
 
     @Autowired
