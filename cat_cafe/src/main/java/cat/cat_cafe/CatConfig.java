@@ -26,14 +26,14 @@ public class CatConfig {
      private static final AntPathRequestMatcher[] WHITE_LIST_URLS = {
         new AntPathRequestMatcher("/api/**"),
         new AntPathRequestMatcher("/h2-console/**"),
-        new AntPathRequestMatcher("/cat**"),
+        new AntPathRequestMatcher("/cats"),
         new AntPathRequestMatcher("/cat/**"),
         new AntPathRequestMatcher("/removecat/**"),
         new AntPathRequestMatcher("/new**"),
-        new AntPathRequestMatcher("/book**"),
+        new AntPathRequestMatcher("/bookings"),
         new AntPathRequestMatcher("/booking/**"),
         new AntPathRequestMatcher("/removebooking/**"),
-        new AntPathRequestMatcher("/user**"),
+        new AntPathRequestMatcher("/users"),
         new AntPathRequestMatcher("/user/**"),
         new AntPathRequestMatcher("/deleteuser/**")
 
@@ -45,14 +45,13 @@ public class CatConfig {
 
         http.authorizeHttpRequests(
             authorize -> authorize
-            .requestMatchers("/css/**").permitAll()
             .requestMatchers(antMatcher("/index/**")).permitAll()
             .requestMatchers(antMatcher("/catlist")).permitAll()
             .requestMatchers(antMatcher("/images/**")).permitAll()
             .requestMatchers(antMatcher("/signup")).permitAll()
             .requestMatchers(antMatcher("/savecustomer")).permitAll()
             .requestMatchers(antMatcher("/")).permitAll()
-            .requestMatchers(WHITE_LIST_URLS).hasAuthority("ADMIN")
+            .requestMatchers(WHITE_LIST_URLS).permitAll()
             .anyRequest().authenticated())
             .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.disable()))
             .formLogin(formlogin -> formlogin

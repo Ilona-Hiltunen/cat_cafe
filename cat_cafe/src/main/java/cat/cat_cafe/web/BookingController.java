@@ -35,7 +35,7 @@ public class BookingController {
         model.addAttribute("appUser", appUser);
         model.addAttribute("booking", new Booking());
         model.addAttribute("bookings", bRepository.findByAppUser(appUser));
-        return "/booktable";
+        return "booktable";
     }
 
     //Generating a method to save a booking to the database with validation
@@ -46,13 +46,13 @@ public class BookingController {
             model.addAttribute("booking", booking);
             model.addAttribute("appUser", booking.getAppUser());
             model.addAttribute("bookings", bRepository.findByAppUser(booking.getAppUser()));
-            return "/booktable";
+            return "booktable";
         } else if (booking.getBookingDate().isBefore(LocalDateTime.now())) {
             bindingResult.rejectValue("bookingDate", "err.date", "Booking can't be in the past.");
             model.addAttribute("booking", booking);
             model.addAttribute("appUser", booking.getAppUser());
             model.addAttribute("bookings", bRepository.findByAppUser(booking.getAppUser()));
-            return "/booktable";
+            return "booktable";
         } else if (booking.getBookingDate().getHour() < 10 || booking.getBookingDate().getHour() >= 19) {
 
             if (booking.getBookingDate().getHour() == 19 && booking.getBookingDate().getMinute() == 0) {
@@ -64,13 +64,13 @@ public class BookingController {
             model.addAttribute("booking", booking);
             model.addAttribute("appUser", booking.getAppUser());
             model.addAttribute("bookings", bRepository.findByAppUser(booking.getAppUser()));
-            return "/booktable";
+            return "booktable";
         } else if (booking.getBookingDate().getDayOfWeek().name().equals("SUNDAY")) {
             bindingResult.rejectValue("bookingDate", "err.date2", "Unfortunately we're closed on sundays.");
             model.addAttribute("booking", booking);
             model.addAttribute("appUser", booking.getAppUser());
             model.addAttribute("bookings", bRepository.findByAppUser(booking.getAppUser()));
-            return "/booktable";
+            return "booktable";
         };
         
         bRepository.save(booking);
@@ -84,7 +84,7 @@ public class BookingController {
         if (bindingResult.hasErrors()) {
             model.addAttribute("booking", booking);
             model.addAttribute("appUser", booking.getAppUser());
-            return "/editbooking";
+            return "editbooking";
         };
         
         bRepository.save(booking);

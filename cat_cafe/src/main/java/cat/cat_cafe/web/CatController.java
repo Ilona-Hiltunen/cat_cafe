@@ -55,7 +55,7 @@ public class CatController {
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("cat", cat);
-            return "/addcat";
+            return "addcat";
         }
 
     //Had to do this, because I found out multipartfile always getting filled even though user didn't send any file
@@ -77,7 +77,7 @@ public class CatController {
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("cat", cat);
-            return "/editcat";
+            return "editcat";
         } if (cat.getBirthdate().getYear() < 1986) {
             bindingResult.rejectValue("birthdate", "err.birthdate", "Cat can't be this old.");
         }
