@@ -17,6 +17,10 @@ public class FileUploadUtil {
 
         Path path = (Path)Paths.get("src/main/resources/static/images/");
 
+        if (!Files.exists(path)) {
+            Files.createDirectories(path);
+        }
+
         try (InputStream inputStream = multipartFile.getInputStream()) {
             Path filePath = path.resolve(filename);
             System.out.println(filePath);
