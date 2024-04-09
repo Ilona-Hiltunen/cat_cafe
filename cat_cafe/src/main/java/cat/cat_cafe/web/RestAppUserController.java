@@ -25,16 +25,19 @@ public class RestAppUserController {
     @Autowired
     private AppuserRepository repository;
 
+    //Rest-method to get all users
     @GetMapping("/users")
     public Iterable<Appuser> getUsers() {
         return repository.findAll();
     }
 
+    //Rest-method to get a spesific user
     @GetMapping("/user/{id}")
     public Optional<Appuser> getUser(@PathVariable("id") Long id) {
         return repository.findById(id);
     }
 
+    //Rest-method to save a new user
     @PostMapping("/newuser")
     Appuser newUser (@RequestBody UserSignUp  newUser) {
         
@@ -47,12 +50,14 @@ public class RestAppUserController {
         return repository.save(user);
     }
     
+    //Rest-method to edit the user
     @PutMapping("/user/{id}")
     Appuser editUser (@PathVariable("id") Long id, @RequestBody Appuser editUser) {
         editUser.setAppUserId(id);
         return repository.save(editUser);
     }
 
+    //Rest-method to delete a user
     @DeleteMapping("/deleteuser/{id}")
     public void deleteUser (@PathVariable("id") Long id) {
         repository.deleteById(id);
