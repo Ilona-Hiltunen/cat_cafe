@@ -15,7 +15,7 @@ public class FileUploadUtil {
 
     public static void saveFile(String filename, MultipartFile multipartFile) throws IOException {
 
-        Path path = (Path)Paths.get("src/main/resources/static/images/");
+        Path path = (Path)Paths.get("src/main/resources/static/images");
 
         try (InputStream inputStream = multipartFile.getInputStream()) {
             Path filePath = path.resolve(filename);
