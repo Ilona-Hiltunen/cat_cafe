@@ -15,15 +15,15 @@ import jakarta.validation.constraints.Size;
 import jakarta.persistence.GenerationType;
 
 @Entity
-@Table(name="Users")
+@Table(name="users")
 public class Appuser {
 
 // Generating an id with validation
 @Id
-@GeneratedValue(strategy = GenerationType.AUTO)
+@GeneratedValue(strategy = GenerationType.IDENTITY)
 @Column(name = "id", nullable = false, unique = true)
 @NotNull(message = "{id.not.null}")
-private long appUserId;
+private long userid;
 
 //Generating an username with validation
 @Column(name = "username", nullable = false, unique = true)
@@ -92,12 +92,13 @@ public Appuser(
 }
 
 //Generating getters and setters
-public Long getAppUserId() {
-    return appUserId;
+
+public long getUserid() {
+    return userid;
 }
 
-public void setAppUserId(Long appUserId) {
-    this.appUserId = appUserId;
+public void setUserid(long userid) {
+    this.userid = userid;
 }
 
 public String getUsername() {
@@ -168,9 +169,11 @@ public void setLastname(String lastname) {
 
 @Override
 public String toString() {
-    return "Appuser [appUserId=" + appUserId + ", username=" + username + ", passwordHash=" + passwordHash + ", role="
+    return "Appuser [appUserId=" + userid + ", username=" + username + ", passwordHash=" + passwordHash + ", role="
             + role + ", firstname=" + firstname + ", lastname=" + lastname + ", email=" + email + ", pNumber=" + pNumber
             + "]";
 }
+
+
     
 }

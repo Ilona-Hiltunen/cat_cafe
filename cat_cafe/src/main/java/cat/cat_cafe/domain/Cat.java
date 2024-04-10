@@ -12,36 +12,42 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 //Defining this class as with Entity, so it represents a table stored in a database
 @Entity
+@Table(name="cats")
 public class Cat {
 
 //Generating an id with validation
 @Id
 @NotNull(message = "{id.not.null}")
 @Column(name="id", nullable=false, updatable=false)
-@GeneratedValue(strategy = GenerationType.AUTO)
+@GeneratedValue(strategy = GenerationType.IDENTITY)
 private long id;
 
 //Setting a cat name with validation
 @NotEmpty(message="{catname.not.empty}")
 @Size(min=2, max=100, message="{catname.size}")
+@Column(name = "catname", nullable = false)
 private String catname;
 
 //Setting a cat's birthdate with validation. I also had to set specific formatting, so that Google Chrome shows date input on the website as it's supposed to.
 @NotNull(message="{date.not.null}")
 @DateTimeFormat(pattern = "yyyy-MM-dd")
+@Column(name = "birthdate", nullable = false)
 private LocalDate birthdate;
 
 //Setting a cat description with validation
 @Size(max=500, message="{description.size}")
+@Column(name = "description")
 private String description;
 
 //Generating String with path to cat's image and setting a default picture
+@Column(name = "imagepath")
 private String imagepath = "/images/paw-print-220232_1280.jpg";
 
 //Generating a empty constructor and one with values

@@ -80,7 +80,7 @@
 		<form class="w3-container" th:object="${booking}" th:action="@{/savebooking}" action="#" method="post">
 			<p>Making a reservation as&nbsp<span class="w3-tag"> <span th:text="${appUser.firstname} + ' ' + ${appUser.lastname}"></span></span></p>
 			<select id="appUser" th:field="*{appUser}" class="form-control" hidden>
-				<option th:each="appUser : ${appUser}" th:value="${appUser.appUserId}" th:text="${appUser.username}"></option>
+				<option th:each="appUser : ${appUser}" th:value="${appUser.userid}" th:text="${appUser.username}"></option>
 			</select>
 			<label for="guestCount">How many guests?</label>
 			<p><input class="w3-input w3-padding-16 w3-border" type="number" id="guestCount" th:field="*{guestCount}" placeholder="How many guests" ></p>

@@ -53,7 +53,7 @@ public class RestAppUserController {
     //Rest-method to edit the user
     @PutMapping("/user/{id}")
     Appuser editUser (@PathVariable("id") Long id, @RequestBody Appuser editUser) {
-        editUser.setAppUserId(id);
+        editUser.setUserid(id);
         return repository.save(editUser);
     }
 

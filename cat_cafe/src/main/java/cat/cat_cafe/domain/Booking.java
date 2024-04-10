@@ -13,17 +13,19 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 
 //Defining this class as with Entity, so it represents a table stored in a database
 @Entity
+@Table(name="bookings")
 public class Booking {
 
 //Generating an id with validation
 @Id
-@GeneratedValue(strategy = GenerationType.AUTO)
+@GeneratedValue(strategy = GenerationType.IDENTITY)
 @NotNull(message="{id.not.null}")
 @Column(name="id", nullable=false, updatable=false)
 private long id;
@@ -43,7 +45,7 @@ private LocalDateTime bookingDate;
 
 //Joining this column to an Appuser-column, so we can connect the reservation with the user who made it
 @ManyToOne
-@JoinColumn(name="appUserId")
+@JoinColumn(name="userid")
 @NotNull(message = "{appUser.not.null}")
 private Appuser appUser;
 
