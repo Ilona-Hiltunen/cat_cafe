@@ -7,3 +7,5 @@ This is an app for an imaginary cat café called Meow. In the app, you can see t
 If you're an admin, you can edit the cat list in case you get a new cat or you want to edit or delete old cats. Additionally, you can see all reservations and perform CRUD operations on them (Create, Read, Update, Delete).
 
 Render deployment with H2 database: [https://cat-cafek24.onrender.com/index](https://cat-cafek24.onrender.com/index)
+
+Render deployment with PostgreSQL-database: [https://cat-cafek24pg.onrender.com/index](https://cat-cafek24pg.onrender.com/index)
