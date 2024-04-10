@@ -1,7 +1,5 @@
 package cat.cat_cafe.web;
 import java.io.IOException;
-import java.time.LocalDate;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
